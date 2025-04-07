@@ -3,11 +3,11 @@
     enable = true;
     defaultEditor = true;
     viAlias = true;
-    vimAlias = true;
+    vimAlias = false;
     withNodeJs = true;
     withRuby = true;
     withPython3 = true;
-    
+
     configure = {
       customRC = ''
       " Basic Settings

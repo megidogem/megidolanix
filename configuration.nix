@@ -3,9 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./nvidia.nix
     ./pkgs.nix
-    ./nvim.nix
   ];
 
   # Boot settings
@@ -39,7 +37,7 @@
 
   # Networking
   networking = {
-    hostName = "valor";
+    hostName = "wisdom";
     networkmanager.enable = true;
     nftables.enable = true;
     wireless.enable = false;
@@ -71,10 +69,17 @@
 
   # Services
   services = {
+
+    locate = {
+      enable = true;
+      interval = "hourly";
+      package = pkgs.plocate;
+    };
+
     xserver = {
       enable = true;
       layout = "es";
-      videoDrivers = [ "nvidia" ];
+      #videoDrivers = [ "nvidia" ];
       displayManager = {
         gdm.enable = true;
         autoLogin = {
@@ -130,7 +135,7 @@
   environment.gnome.excludePackages = (with pkgs; [ ]);
 
   environment = {
-    variables.EDITOR = "nvim";
+    variables.EDITOR = "vim";
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS =
         "/home/marko/.steam/root/compatibilitytools.d";
@@ -149,7 +154,6 @@
       prompt.enable = false;
     };
     htop.enable = true;
-    hyprland.enable = false;
     java.enable = true;
     nix-ld.enable = true;
     obs-studio = {
@@ -157,6 +161,10 @@
       plugins = [ pkgs.obs-studio-plugins.droidcam-obs ];
     };
     steam.enable = true;
+    vim = {
+      enable = true;
+      defaultEditor = true;
+    };
     yazi.enable = true;
     xwayland.enable = true;
   };
