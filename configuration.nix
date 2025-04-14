@@ -3,7 +3,7 @@
 {
 
   imports = [
-    ./hardware-configuration.nix
+    /root/nixos.bak/hardware-configuration.nix
     ./pkgs.nix
     ./nvidia.nix
     ./sway.nix
