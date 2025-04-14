@@ -22,7 +22,7 @@
     #ppsspp
     #protonup
     prismlauncher
-    qbittorrent
+    #qbittorrent
     rar
       unrar
     #remmina

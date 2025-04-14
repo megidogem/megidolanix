@@ -5,7 +5,7 @@
   imports = [
     /root/nixos.bak/hardware-configuration.nix
     ./pkgs.nix
-    ./nvidia.nix
+    #./nvidia.nix
     ./sway.nix
   ];
 
@@ -20,13 +20,21 @@
     plymouth.enable = false;
   };
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-    inter-nerdfont
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-emoji
-  ];
+  fonts = {
+    packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+      inter-nerdfont
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+    ];
+    fontconfig.defaultFonts = {
+      serif = [ "Inter Nerd Font" ];
+      sansSerif = [ "Inter Nerd Font" ];
+      monospace = [ "JetBrainsMono Nerd Font" ];
+      emoji = [ "Noto Color Emoji" ];
+    };
+  };
 
   hardware = {
     bluetooth = {
@@ -67,6 +75,14 @@
   console.keyMap = "es";
 
   services = {
+
+  cron = {
+    enable = true;
+    systemCronJobs = [
+      "* * * * * sh /home/marko/Scripts/xbacklight.sh"
+    ];
+  };
+
     locate = {
       enable = true;
       interval = "hourly";
@@ -76,7 +92,7 @@
     xserver = {
       enable = true;
       layout = "es";
-      videoDrivers = [ "nvidia" ];
+      #videoDrivers = [ "nvidia" ];
       displayManager = {
         gdm.enable = false;
         lightdm.enable = false;
@@ -129,7 +145,7 @@
 
     isNormalUser = true;
     description = "marko";
-    extraGroups = [ "networkmanager" "wheel" "gamemode" "vboxusers" ];
+    extraGroups = [ "networkmanager" "wheel" "gamemode" "vboxusers" "video" ];
     packages = with pkgs; [];
   };
 

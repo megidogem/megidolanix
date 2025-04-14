@@ -2,22 +2,23 @@
 {
 
   programs = {
-    nm-applet.enable = true;
     sway = {
       enable = true;
       wrapperFeatures.gtk = true;
       extraOptions = [ "--unsupported-gpu" ];
       extraPackages = with pkgs; [
+	acpilight # Con el script en ~/Scripts funciona xbacklight
         adwaita-icon-theme
         alacritty
         bemenu
-        jq
+        # NO me funciona - jq
         gammastep
         grim
         i3status
         mako
         nwg-look
-        pavucontrol
+        pavucontrol # Para que funcione pactl
+	pulseaudio
         slurp
         swayidle
         swayimg
@@ -34,6 +35,9 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  services.gnome.gnome-keyring.enable = true;
+  services = { 
+    gnome.gnome-keyring.enable = true;
+    power-profiles-daemon.enable = true;
+  };
 
 }
