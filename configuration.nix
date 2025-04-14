@@ -1,14 +1,16 @@
 { config, pkgs, ... }:
 
 {
+
   imports = [
     ./hardware-configuration.nix
     ./pkgs.nix
+    ./nvidia.nix
+    ./sway.nix
   ];
 
-  # Boot settings
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_lqx;
     blacklistedKernelModules = [ "kvm_intel" "kvm_amd" "kvm" ];
     loader = {
       systemd-boot.enable = true;
@@ -26,7 +28,6 @@
     noto-fonts-emoji
   ];
 
-  # Hardware configuration
   hardware = {
     bluetooth = {
       enable = false;
@@ -35,20 +36,18 @@
     graphics.enable = true;
   };
 
-  # Networking
   networking = {
-    hostName = "wisdom";
+    hostName = "valor";
     networkmanager.enable = true;
     nftables.enable = true;
     wireless.enable = false;
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22000 25577 25578 25579 ]; # Syncthing, SSH, Mine...
+      allowedTCPPorts = [ 22 22000 25577 25578 25579 ]; # Syncthing, SSH, Mine...
       allowedUDPPorts = [ 21027 22000 25577 25578 ];
     };
   };
 
-  # Time and locale
   time.timeZone = "Europe/Madrid";
   i18n = {
     defaultLocale = "es_ES.UTF-8";
@@ -67,9 +66,7 @@
 
   console.keyMap = "es";
 
-  # Services
   services = {
-
     locate = {
       enable = true;
       interval = "hourly";
@@ -79,21 +76,29 @@
     xserver = {
       enable = true;
       layout = "es";
-      #videoDrivers = [ "nvidia" ];
+      videoDrivers = [ "nvidia" ];
       displayManager = {
-        gdm.enable = true;
+        gdm.enable = false;
         autoLogin = {
-          enable = true;
+          enable = false;
           user = "marko";
         };
       };
-      desktopManager.gnome.enable = true;
+
+      desktopManager = {
+
+      gnome.enable = false;
+
+      retroarch = {
+        enable = false;
+        package = pkgs.retroarch;
+      };
+
     };
 
-    gnome = {
-      core-utilities.enable = false;
-    };
+  };
 
+    gnome.core-utilities.enable = false;
 
     pipewire = {
       enable = true;
@@ -111,43 +116,48 @@
       configDir = "/home/marko/.config/syncthing";
     };
 
-    flatpak.enable = false;
+    flatpak.enable = true;
     teamviewer.enable = false;
     openssh.enable = true;
     openssh.ports = [ 25577 ];
+
   };
 
   security.rtkit.enable = true;
-
   users.users.marko = {
+
     isNormalUser = true;
     description = "marko";
     extraGroups = [ "networkmanager" "wheel" "gamemode" "vboxusers" ];
     packages = with pkgs; [];
   };
 
-  virtualisation.virtualbox.host = {
-    enable = true;
-    enableExtensionPack = false;
+  virtualisation = {
+    virtualbox.host = {
+      enable = true;
+      enableExtensionPack = false;
+    };
+    libvirtd.enable = false;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
   };
-  virtualisation.libvirtd.enable = false;
 
-  environment.gnome.excludePackages = (with pkgs; [ ]);
+  environment.gnome.excludePackages = (with pkgs; [gnome-tour]);
 
   environment = {
     variables.EDITOR = "vim";
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS =
         "/home/marko/.steam/root/compatibilitytools.d";
-      NIXOS_OZONE_WL = "1";
     };
   };
-
   programs = {
     bat.enable = true;
-    evince.enable = true;
-    file-roller.enable = true;
-    fish.enable = true;
+    evince.enable = false;
+    file-roller.enable = false;
+    fish.enable = false;
     gamemode.enable = true;
     git = {
       enable = true;
@@ -165,11 +175,10 @@
       enable = true;
       defaultEditor = true;
     };
-    yazi.enable = true;
-    xwayland.enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;
+
   system = {
     stateVersion = "24.11";
     autoUpgrade = {
@@ -190,6 +199,8 @@
     };
   };
 
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
+# Esto es una movida pal autologin de GNOME
+  #systemd.services."getty@tty1".enable = false;
+  #systemd.services."autovt@tty1".enable = false;
+
 }

@@ -3,48 +3,53 @@
 {
   # System packages
   environment.systemPackages = with pkgs; [
-    #audacity
-    appimage-run
+    audacity
+    #appimage-run
     btop
+    #distrobox
+    #dolphin-emu
+    #duckstation
     eza
     fastfetch
     gimp
     ghostty
-    gnome-console
+    gnome-calculator
+    gnome-calendar
     gnome-extension-manager
+    gnome-terminal
     gnome-tweaks
-    hakuneko
-    #kdePackages.kdenlive
+    #godot
+    #hakuneko
+    kdePackages.kdenlive
     keepassxc
     libreoffice-fresh
     librewolf
+    #links2
     loupe
     mcrcon
-    mediawriter
-    #multitail
+    #mediawriter
     nautilus
     ncdu
     #osu-lazer-bin
-    #pcsx2
-    ppsspp
-    protonup
-    pomodoro-gtk
+    pcsx2
+    #ppsspp
+    #protonup
     prismlauncher
     qbittorrent
     rar
       unrar
-    remmina
+    #remmina
     #sm64coopdx
-    spotdl
+    #spotdl
     tldr
     tor-browser
-    ventoy-full-gtk
+    #ventoy-full-gtk
     vesktop
     vim
     vlc
-    vscodium-fhs
+    #vscodium-fhs
     wget
-    winePackages.unstableFull
+    #winePackages.unstableFull
     wl-clipboard
     yt-dlp
     zip
