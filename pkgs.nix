@@ -4,31 +4,18 @@
   # System packages
   environment.systemPackages = with pkgs; [
     audacity
-    #appimage-run
     btop
-    #distrobox
-    #dolphin-emu
-    #duckstation
     eza
     fastfetch
     gimp
-    ghostty
-    gnome-calculator
-    gnome-calendar
-    gnome-extension-manager
-    gnome-terminal
-    gnome-tweaks
-    #godot
     #hakuneko
     kdePackages.kdenlive
     keepassxc
+    killall
     libreoffice-fresh
     librewolf
-    #links2
-    loupe
     mcrcon
-    #mediawriter
-    nautilus
+    mpv
     ncdu
     #osu-lazer-bin
     pcsx2
@@ -46,7 +33,6 @@
     #ventoy-full-gtk
     vesktop
     vim
-    vlc
     #vscodium-fhs
     wget
     #winePackages.unstableFull

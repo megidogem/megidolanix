@@ -17,15 +17,15 @@
         i3status
         mako
         nwg-look
+        pavucontrol
         slurp
         swayidle
         swayimg
         swaylock
         zathura
       ];
-      #package = pkgs.swayfx;
+      xwayland.enable = true;
     };
-    yazi.enable = true;
   };
 
   xdg.portal = {

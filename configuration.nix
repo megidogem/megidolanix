@@ -17,7 +17,7 @@
       efi.canTouchEfiVariables = true;
       timeout = 1;
     };
-    plymouth.enable = true;
+    plymouth.enable = false;
   };
 
   fonts.packages = with pkgs; [
@@ -79,6 +79,7 @@
       videoDrivers = [ "nvidia" ];
       displayManager = {
         gdm.enable = false;
+        lightdm.enable = false;
         autoLogin = {
           enable = false;
           user = "marko";
@@ -151,6 +152,7 @@
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS =
         "/home/marko/.steam/root/compatibilitytools.d";
+      NIXOS_OZONE_WL = "1";
     };
   };
   programs = {
@@ -195,7 +197,7 @@
     optimise.automatic = true;
     settings = {
       auto-optimise-store = true;
-      max-jobs = 2;
+      max-jobs = 1;
     };
   };
 
