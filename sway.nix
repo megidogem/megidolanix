@@ -5,20 +5,20 @@
     sway = {
       enable = true;
       wrapperFeatures.gtk = true;
+      package = pkgs.swayfx;
       extraOptions = [ "--unsupported-gpu" ];
       extraPackages = with pkgs; [
-	acpilight # Con el script en ~/Scripts funciona xbacklight
+	    acpilight # Con el script en ~/Scripts funciona xbacklight
         adwaita-icon-theme
         alacritty
         bemenu
-        # NO me funciona - jq
         gammastep
         grim
         i3status
         mako
         nwg-look
-        pavucontrol # Para que funcione pactl
-	pulseaudio
+        pavucontrol
+	    pulseaudio # Para pactl
         slurp
         swayidle
         swayimg
